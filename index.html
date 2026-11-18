@@ -11,40 +11,42 @@
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      height: 100vh;
+      height: 100dvh; /* Fits the exact visible screen, ignoring browser bars */
       margin: 0;
+      padding: 15px;
+      box-sizing: border-box;
       background-color: #f4f4f9;
       user-select: none;
       -webkit-user-select: none;
-      touch-action: manipulation; /* Prevents double-tap zoom delay */
+      touch-action: manipulation;
       overflow: hidden;
     }
     .header {
-      padding: 20px;
       text-align: center;
+      padding-top: 5px;
+    }
+    .label {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 5px;
     }
     #count {
-      font-size: 7rem;
+      font-size: clamp(4.5rem, 18vw, 7rem); /* Scales smoothly on smaller screens */
       font-weight: bold;
       color: #333;
       line-height: 1;
     }
-    .label {
-      font-size: 1.2rem;
-      color: #666;
-      margin-top: 5px;
-    }
     .buttons {
       display: flex;
       width: 100%;
-      height: 50vh;
-      gap: 10px;
-      padding: 10px;
-      box-sizing: border-box;
+      flex: 1; /* Automatically fills remaining space without pushing Reset off-screen */
+      max-height: 55dvh;
+      gap: 12px;
+      margin: 15px 0;
     }
     button {
       flex: 1;
-      font-size: 3rem;
+      font-size: 3.5rem;
       font-weight: bold;
       border: none;
       border-radius: 20px;
@@ -57,11 +59,11 @@
     #add { background-color: #28a745; }
     
     .footer {
-      padding-bottom: 20px;
+      padding-bottom: 5px;
     }
     #reset { 
       font-size: 1rem; 
-      padding: 12px 30px; 
+      padding: 12px 32px; 
       background-color: #6c757d; 
       border-radius: 10px;
       border: none;
