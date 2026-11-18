@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance Clicker</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f9;
+      user-select: none;
+    }
+    #count {
+      font-size: 6rem;
+      font-weight: bold;
+      margin: 20px 0;
+      color: #333;
+    }
+    .buttons {
+      display: flex;
+      gap: 15px;
+    }
+    button {
+      font-size: 1.5rem;
+      padding: 20px 40px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+    button:active { transform: scale(0.95); }
+    #add { background-color: #28a745; color: white; }
+    #sub { background-color: #dc3545; color: white; }
+    #reset { 
+      margin-top: 30px; 
+      font-size: 1rem; 
+      padding: 10px 20px; 
+      background-color: #6c757d; 
+      color: white; 
+    }
+  </style>
+</head>
+<body>
+
+  <div>Current Attendance</div>
+  <div id="count">0</div>
+
+  <div class="buttons">
+    <button id="sub" onclick="update(-1)">-</button>
+    <button id="add" onclick="update(1)">+1</button>
+  </div>
+
+  <button id="reset" onclick="resetCount()">Reset</button>
+
+  <script>
+    // Load saved count from browser storage so it doesn't vanish on refresh
+    let count = parseInt(localStorage.getItem('attendanceCount')) || 0;
+    const display = document.getElementById('count');
+    display.innerText = count;
+
+    function update(change) {
+      count = Math.max(0, count + change); // Prevents going below 0
+      display.innerText = count;
+      localStorage.setItem('attendanceCount', count);
+    }
+
+    function resetCount() {
+      if (confirm("Reset attendance to 0?")) {
+        count = 0;
+        display.innerText = count;
+        localStorage.setItem('attendanceCount', count);
+      }
+    }
+  </script>
+
+</body>
+</html>
